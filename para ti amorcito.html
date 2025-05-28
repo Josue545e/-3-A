@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carta de Amor para Ayli</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fce1e4, #f9d6d5);
+      font-family: 'Montserrat', sans-serif;
+      color: #4a2c2a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .container {
+      background: white;
+      max-width: 600px;
+      padding: 40px 50px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(204, 94, 116, 0.4);
+      text-align: center;
+      position: relative;
+      animation: fadeInScale 1.2s ease forwards;
+      z-index: 1;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.8rem;
+      margin-bottom: 0.2em;
+      color: #d0456f;
+      text-shadow: 1px 1px 4px #f8c7d1;
+      animation: heartbeat 2s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+        color: #d0456f;
+      }
+      50% {
+        transform: scale(1.1);
+        color: #ff688b;
+      }
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin: 1.5em 0 2em;
+      color: #6a3d3d;
+    }
+
+    .heart {
+      color: #ff4c68;
+      font-size: 2rem;
+      animation: floatUp 3s ease-in-out infinite;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      user-select: none;
+      filter: drop-shadow(0 0 4px #ff4c68);
+    }
+
+    @keyframes floatUp {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-15px) scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    /* Fondo con pequeños corazones animados */
+    body::before {
+      content: "❤️";
+      position: fixed;
+      top: 20%;
+      left: 10%;
+      font-size: 3rem;
+      color: #ff4c68;
+      opacity: 0.15;
+      animation: drift 8s linear infinite;
+    }
+
+    body::after {
+      content: "❤️";
+      position: fixed;
+      bottom: 15%;
+      right: 15%;
+      font-size: 4rem;
+      color: #d45c6a;
+      opacity: 0.12;
+      animation: driftReverse 10s linear infinite;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateX(20px) translateY(-30px) rotate(360deg);
+      }
+    }
+
+    @keyframes driftReverse {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateX(-20px) translateY(30px) rotate(-360deg);
+      }
+    }
+
+    /* Texto final */
+    .final-message {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: #d0456f;
+      margin-top: 30px;
+      text-shadow: 1px 1px 4px #f8c7d1;
+      user-select: none;
+    }
+
+    /* Estilo corazones flotantes */
+    .floating-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      color: #ff4c68;
+      animation: floatUpCustom 1.5s ease forwards;
+      user-select: none;
+      filter: drop-shadow(0 0 5px #ff4c68);
+      z-index: 9999;
+    }
+
+    @keyframes floatUpCustom {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heart" aria-hidden="true">❤️</div>
+    <h1>Para Ayli</h1>
+    <p>
+      Querida Ayli,<br /><br />
+      Cada día que pasa, mi corazón late más fuerte por ti. Eres la luz que ilumina mis mañanas y la calma que abraza mis noches.<br /><br />
+      Gracias por ser esa persona tan especial que llena mi vida de alegría, amor y sueños compartidos.<br /><br />
+      Con todo mi cariño, hoy y siempre.<br /><br />
+      <strong>Josue te ama 💖</strong>
+    </p>
+    <div class="final-message">Josue te ama ❤️</div>
+  </div>
+
+  <script>
+    // Función para crear corazones flotantes en la posición del clic/touch
+    function createHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = '❤️';
+      heart.style.left = (x - 12) + 'px';  // centramos el corazón (24px tamaño)
+      heart.style.top = (y - 12) + 'px';
+      
+      document.body.appendChild(heart);
+      
+      // Remover el corazón después de la animación
+      heart.addEventListener('animationend', () => {
+        heart.remove();
+      });
+    }
+
+    // Detectar clic o toque en toda la pantalla
+    function handleClick(event) {
+      // Obtener coordenadas (para toque o click)
+      let x, y;
+      if(event.touches && event.touches.length > 0){
+        x = event.touches[0].clientX;
+        y = event.touches[0].clientY;
+      } else {
+        x = event.clientX;
+        y = event.clientY;
+      }
+      createHeart(x, y);
+    }
+
+    // Agregar eventos para clic y toque
+    document.body.addEventListener('click', handleClick);
+    document.body.addEventListener('touchstart', handleClick);
+  </script>
+</body>
+</html>
